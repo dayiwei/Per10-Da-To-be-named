@@ -22,8 +22,12 @@ void setup(){
   groundBodyDef.position.set(center);
   Body body = box2d.createBody(groundBodyDef);
   
-  PImage smoke = loadImage("0001.png");
-  image(smoke,center.x,center.y);
+
+//  File dir = new File(new File("fireball"), "all");
+//  PImage smoke = loadImage(new File(dir,"0001.png").getAbsolutePath());
+//  image(smoke,0,0);
+  
+  
 }
 
 
