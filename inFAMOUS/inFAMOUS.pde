@@ -8,7 +8,7 @@ Vec2 gravity = new Vec2(0.0f, -10.0f);
 
 BodyDef groundBodyDef = new BodyDef();
 
-
+ArrayList<PImage> fire;
 
 void setup(){
   size(750,500);
@@ -22,10 +22,18 @@ void setup(){
   groundBodyDef.position.set(center);
   Body body = box2d.createBody(groundBodyDef);
   
+  File fireball = new File("fireball/all");
+  File[] f = fireball.listFiles();
+  for(File child : f){
+    fire.add(loadImage(child.getAbsolutePath())); 
+  }
+  
 
-//  File dir = new File(new File("fireball"), "all");
-//  PImage smoke = loadImage(new File(dir,"0001.png").getAbsolutePath());
-//  image(smoke,0,0);
+
+//  for(int i=0;i<216;i++){
+//    fire.add(loadImage("fireball/all"+f[i].getName());
+//  }
+
   
   
 }
