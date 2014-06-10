@@ -1,4 +1,4 @@
-public class Smoke{
+class Smoke{
   
   int num = 1;
   ArrayList<PImage> fire;
@@ -20,5 +20,4 @@ public class Smoke{
     }  
       counter++;
   }
-  
 }

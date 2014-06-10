@@ -1,12 +1,7 @@
-public class Delsin{
-  
-  
-  
-  
-  
-  
+class Delsin {
   
   
   
   
 }
+
