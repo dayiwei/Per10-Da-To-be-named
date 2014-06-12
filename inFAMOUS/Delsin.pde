@@ -2,9 +2,10 @@ class Delsin {
   
   int health;
   int counter;
+  int x,y;
   float px,py,w,h;
-  boolean right;
-  boolean isrunning;
+
+  boolean isRunning;
   boolean isattcking;
   
   ArrayList<PImage> running;
@@ -22,7 +23,9 @@ class Delsin {
     h=44;
     counter=1;
     health = 100;
-    right=true;
+    left=false;
+    right=false;
+    isRunning=false;
     BodyDef def = new BodyDef();
     def.type = BodyType.DYNAMIC;
     //center point
@@ -56,6 +59,19 @@ class Delsin {
                        {321,254,353,296} };
     sora = loadImage("sora.png");
     sora.loadPixels();
+    standby = createImage(36,51,RGB);
+    standby.loadPixels();
+    x=47;
+    y=595;
+    for(int s=0;s<standby.pixels.length;s++){
+      standby.pixels[s]=sora.pixels[y*600+x];
+      x++;
+      if(x>82){
+        x=47;
+        y++; 
+      }
+    }
+    standby.updatePixels();
     for(int i=0;i<8;i++){
       p = createImage(coords[0][2]-coords[0][0]+1,coords[0][3]-coords[0][1]+1,RGB);
       p.loadPixels();
@@ -76,55 +92,49 @@ class Delsin {
     
   }
   
-  void keyPressed() {
-      if(key=='w'){
-        
-      }
 
-      if(key=='a'){
-
-      }
-      if(key=='d'){
-
-      }
-      if(key=='s'){
-        
-      }
-       
-  }
   
   void display(){
     Vec2 pos = box2d.getBodyPixelCoord(bd);
-    int x=Float.valueOf(pos.x-w/2).intValue();
-    int y=Float.valueOf(pos.y-h/2).intValue();
-    if(true){
-      if(counter/6>7)
-        counter=1;
-      p = running.get(counter/6);
-      p.loadPixels();
-      for(int i=0;i<p.pixels.length;i++){
-        if(p.pixels[i]==color(73,98,132))
-          p.pixels[i]=s0000.pixels[y*750+x];
-        x++;
-        if(x>36+Float.valueOf(pos.x-w/2).intValue()){
-          x=Float.valueOf(pos.x-w/2).intValue();
-          y++; 
-        }
-      }
-      p.updatePixels();
+    PImage display;
+    x=Float.valueOf(pos.x-w/2).intValue();
+    y=Float.valueOf(pos.y-h/2).intValue();
+    if(!left&&!right){
+      display=standby; 
+      standby.loadPixels();
     }
+    else {
+      if(counter/10>7)
+        counter=1;
+      display = running.get(counter/10);
+      display.loadPixels();
+
+    }
+    for(int i=0;i<display.pixels.length;i++){
+      //println(x,y);
+      if(display.pixels[i]==color(73,98,132))
+        display.pixels[i]=s0000.pixels[y*750+x];
+      x++;
+      if(x>36+Float.valueOf(pos.x-w/2).intValue()){
+        x=Float.valueOf(pos.x-w/2).intValue();
+        y++; 
+      }
+    }
+    display.updatePixels();
     
     if(right){
       pushMatrix();
       scale(-1,1);
-      image(p,-1*pos.x-w/2,pos.y-h/2);
+      image(display,-1*pos.x-w/2,pos.y+h/2-display.height);
       popMatrix();
+      counter++; 
     }
-    else
-      image(p,pos.x-w/2,pos.y-h/2);
-    
-
-    
+    else if(left){
+      image(display,pos.x-w/2,pos.y+h/2-display.height);
+      counter++;
+    }
+    image(display,pos.x-w/2,pos.y+h/2-display.height);
+   
     
   }  
   

@@ -5,7 +5,8 @@ import org.jbox2d.collision.shapes.*;
 import java.lang.*;
 
 String prefix = "fireball/all/";  
-
+boolean left;
+boolean right;
 ArrayList<PImage> fire;
 
 ArrayList<Box> boxes;
@@ -47,12 +48,38 @@ void setup() {
 
 }
 
+  void keyPressed() {
+      if(key=='w'){
+      }
+      if(key=='a'){
+        left=true;
+      }
+      if(key=='d'){
+        right=true;
+      }
+      if(key=='s'){
+      }       
+  }
+  
+  void keyReleased(){      
+    if(key=='w'){
+    }
+    if(key=='a'){
+      left=false;
+    }
+    if(key=='d'){
+      right=false;
+    }
+    if(key=='s'){        
+    }             
+  }
 
 void draw() {
   image(bg, 0, 0, 750, 500);
   box2d.step();    
   delsin.display();
   ground.display();
+
 
   // When the mouse is clicked, add a new Box object
   if (mousePressed) {
