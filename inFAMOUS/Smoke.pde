@@ -1,23 +1,12 @@
 class Smoke{
   
-  int num = 1;
-  ArrayList<PImage> fire;
-  String prefix = "fireball/all/";
+  int counter=1;
 
-  Smoke(){
-    fire = new ArrayList<PImage>();
-    for(int i=45;i<63;i++){
-      fire.add(loadImage(prefix+nf(i,4)+".png"));
-    }
-  
-  }
-
-  void display(){
-    image(fire.get(num%10),0,50);
-    if(counter==6){
-      num++;
+  void display(float x, float y){
+    image(fire.get(counter/6),x,y);
+      counter++;
+    if(counter==60){
       counter=1;
     }  
-      counter++;
   }
 }
