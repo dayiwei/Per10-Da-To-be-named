@@ -1,7 +1,6 @@
 class Delsin {
   
   int health;
-  int counter;
   int x,y;
   float px,py,w,h;
 
@@ -23,6 +22,7 @@ class Delsin {
     h=44;
     counter=1;
     health = 100;
+    up=false;
     left=false;
     right=false;
     isRunning=false;
@@ -38,12 +38,23 @@ class Delsin {
 
     FixtureDef f = new FixtureDef();
     f.shape = ps;
-//    f.density = 1;
     f.friction = 0.5;
 //    f.restitution = 0.1;
     bd.createFixture(f);
-
     
+    standby = createImage(36,51,RGB);
+    standby.loadPixels();
+    x=47;
+    y=595;
+    for(int s=0;s<standby.pixels.length;s++){
+      standby.pixels[s]=sora.pixels[y*600+x];
+      x++;
+      if(x>82){
+        x=47;
+        y++; 
+      }
+    }
+    standby.updatePixels();
     
     //running 
     running = new ArrayList<PImage>();
@@ -59,21 +70,23 @@ class Delsin {
                        {321,254,353,296} };
     sora = loadImage("sora.png");
     sora.loadPixels();
-    standby = createImage(36,51,RGB);
-    standby.loadPixels();
-    x=47;
-    y=595;
-    for(int s=0;s<standby.pixels.length;s++){
-      standby.pixels[s]=sora.pixels[y*600+x];
-      x++;
-      if(x>82){
-        x=47;
-        y++; 
-      }
-    }
-    standby.updatePixels();
+    
+//    for(int i=0;i<8;i++){
+//      p = createImage(coords[0][2]-coords[0][0]+1,coords[0][3]-coords[0][1]+1,RGB);
+//      p.loadPixels();
+//      x=coords[i][0];
+//      y=coords[i][1];
+//      for(int pix=0;pix<p.pixels.length;pix++){
+//        p.pixels[pix]=sora.pixels[y*600+x];
+//        x++;
+//        if(x>coords[i][2]){
+//          x=coords[i][0];
+//          y++; 
+//        }
+//      }
+
     for(int i=0;i<8;i++){
-      p = createImage(coords[0][2]-coords[0][0]+1,coords[0][3]-coords[0][1]+1,RGB);
+      p = createImage(coords[i][2]-coords[i][0]+1,coords[i][3]-coords[i][1]+1,RGB);
       p.loadPixels();
       x=coords[i][0];
       y=coords[i][1];
@@ -87,29 +100,48 @@ class Delsin {
       }
       p.updatePixels();
       running.add(p);
+    }    
+  }
+  
+  void move(){
+   Vec2 pos = bd.getPosition();
+   if(up){
+      if(right){
+        bd.applyLinearImpulse(new Vec2(10,10),pos);
+      }
+      else if(left){
+        bd.applyLinearImpulse(new Vec2(-10,10),pos);
+      }
+      else
+        bd.applyLinearImpulse(new Vec2(0,10),pos);
     }
-    
-    
+    else if(left){
+      bd.applyLinearImpulse(new Vec2(-10,0),pos);
+    }
+    else
+      bd.applyLinearImpulse(new Vec2(0,10),pos);
   }
   
 
-  
   void display(){
+   
     Vec2 pos = box2d.getBodyPixelCoord(bd);
     PImage display;
     x=Float.valueOf(pos.x-w/2).intValue();
     y=Float.valueOf(pos.y-h/2).intValue();
-    if(!left&&!right){
+    if(!left&&!right&&up){
+      display=jump; 
+    }
+    else if(!left&&!right){
       display=standby; 
-      standby.loadPixels();
     }
     else {
+      display = running.get(counter/10);
+      counter++;
       if(counter/10>7)
         counter=1;
-      display = running.get(counter/10);
-      display.loadPixels();
-
-    }
+      }
+    display.loadPixels();
     for(int i=0;i<display.pixels.length;i++){
       //println(x,y);
       if(display.pixels[i]==color(73,98,132))
@@ -122,21 +154,21 @@ class Delsin {
     }
     display.updatePixels();
     
-    if(right){
+    if(up){
+       
+    }
+    else if(right){
       pushMatrix();
       scale(-1,1);
-      image(display,-1*pos.x-w/2,pos.y+h/2-display.height);
+      image(display,-1*pos.x-w/2,pos.y-h/2,w,h);
       popMatrix();
       counter++; 
     }
     else if(left){
-      image(display,pos.x-w/2,pos.y+h/2-display.height);
+      image(display,pos.x-w/2,pos.y-h/2,w,h);
       counter++;
     }
-    image(display,pos.x-w/2,pos.y+h/2-display.height);
-   
-    
-  }  
-  
+    else
+      image(display,pos.x-w/2,pos.y-h/2,w,h); 
+  }
 }
-

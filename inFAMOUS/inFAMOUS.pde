@@ -7,16 +7,19 @@ import java.lang.*;
 String prefix = "fireball/all/";  
 boolean left;
 boolean right;
+boolean up;
+int counter;
 ArrayList<PImage> fire;
 
 ArrayList<Box> boxes;
 PImage bg;
 PImage s0000;
-Delsin delsin;
 
 Box2DProcessing box2d;
+Delsin delsin;
 Ground ground;
 Smoke s;
+
 void setup() {
   //Basics
   size(750, 500);
@@ -50,6 +53,7 @@ void setup() {
 
   void keyPressed() {
       if(key=='w'){
+        up=true;
       }
       if(key=='a'){
         left=true;
@@ -57,21 +61,25 @@ void setup() {
       if(key=='d'){
         right=true;
       }
-      if(key=='s'){
-      }       
+//      if(key=='s'){
+//        Delsin.bd.applyForceToCenter(new Vec2(0,-15));
+//      }       
   }
   
   void keyReleased(){      
     if(key=='w'){
+      up=false;
     }
     if(key=='a'){
       left=false;
+      counter=0;
     }
     if(key=='d'){
       right=false;
+      counter=0;
     }
-    if(key=='s'){        
-    }             
+//    if(key=='s'){        
+//    }             
   }
 
 void draw() {
@@ -80,7 +88,7 @@ void draw() {
   delsin.display();
   ground.display();
 
-
+  //cursor(CROSS);
   // When the mouse is clicked, add a new Box object
   if (mousePressed) {
     Box p = new Box(mouseX,mouseY);
@@ -92,5 +100,3 @@ void draw() {
     b.display();
   }
 }
-
-
