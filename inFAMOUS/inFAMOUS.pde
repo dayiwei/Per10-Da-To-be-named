@@ -38,7 +38,7 @@ void setup() {
   //Box2d stuff
   box2d = new Box2DProcessing(this);
   box2d.createWorld();
-  box2d.setGravity(0,-10);
+  box2d.setGravity(0,-60);
   //box2d.listenForCollisions();
 
   delsin = new Delsin(550,330);
@@ -82,10 +82,17 @@ void setup() {
 //    }             
   }
 
+//  void mousePressed(){
+//    delsin.shoot(); 
+//    
+//  }
+
 void draw() {
   image(bg, 0, 0, 750, 500);
-  box2d.step();    
+  box2d.step();
   delsin.display();
+  delsin.move();
+
   ground.display();
 
   //cursor(CROSS);

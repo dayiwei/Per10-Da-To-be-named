@@ -7,6 +7,6 @@ class Smoke{
       counter++;
     if(counter==60){
       counter=1;
-    }  
+    }
   }
 }
