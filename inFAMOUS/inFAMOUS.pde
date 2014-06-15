@@ -41,12 +41,9 @@ void setup() {
   box2d.setGravity(0,-60);
   //box2d.listenForCollisions();
 
+
   delsin = new Delsin(550,330);
   ground = new Ground(375,450,750,100);
-  image(bg,0,0,750,500);
-  saveFrame("s0000.png");
-  s0000 = loadImage("s0000.png");
-  s0000.loadPixels();
 
 
 }
