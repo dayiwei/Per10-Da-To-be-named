@@ -8,6 +8,7 @@ This is a 2D game with similar mechanics as inFAMOUS Second Son using Box2d and 
 
 
 Controls
+=================
 w,a,s,d for movements. Left mouse button to shoot. Right mouse button to create boxes.
 
 WORK IN PROGRESS!
