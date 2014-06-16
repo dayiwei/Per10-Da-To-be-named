@@ -11,10 +11,6 @@ class Delsin {
   
   boolean isRunning;
   boolean isattcking;
-  
-//  ArrayList<PImage> running;
-//  ArrayList<PImage> attack;
-  //ArrayList<PImage> jump;
 
   Body bd;
 
@@ -63,78 +59,6 @@ class Delsin {
     standby = new int[] {47,595,82,645};
     
     smokeShot = new ArrayList<Smoke_Shot>();
-    
-//    int x=0;
-//    int y=0;
-//    sora.loadPixels();
-//    standby = createImage(36,51,RGB);
-//    standby.loadPixels();
-//    x=47;
-//    y=595;
-//    for(int s=0;s<standby.pixels.length;s++){
-//      standby.pixels[s]=sora.pixels[y*600+x];
-//      x++;
-//      if(x>82){
-//        x=47;
-//        y++; 
-//      }
-//    }
-//    standby.updatePixels();
-      
-//    for(int i=0;i<8;i++){
-//      p = createImage(coords[0][2]-coords[0][0]+1,coords[0][3]-coords[0][1]+1,RGB);
-//      p.loadPixels();
-//      x=coords[i][0];
-//      y=coords[i][1];
-//      for(int pix=0;pix<p.pixels.length;pix++){
-//        p.pixels[pix]=sora.pixels[y*600+x];
-//        x++;
-//        if(x>coords[i][2]){
-//          x=coords[i][0];
-//          y++; 
-//        }
-//      }
-
-//    for(int i=0;i<coords.length;i++){
-//      p = createImage(coords[i][2]-coords[i][0]+1,coords[i][3]-coords[i][1]+1,RGB);
-//      p.loadPixels();
-//      x=coords[i][0];
-//      y=coords[i][1];
-//      for(int pix=0;pix<p.pixels.length;pix++){
-//        p.pixels[pix]=sora.pixels[y*600+x];
-//        x++;
-//        if(x>coords[i][2]){
-//          x=coords[i][0];
-//          y++; 
-//        }
-//      }
-//      p.updatePixels();
-//      running.add(p);
-//    }
-   
-
-//    //jump
-//    jump=new ArrayList<PImage>();
-//    int[][] coords1 = { {11,768,54,798},
-//               {55,764,93,798},
-//               {93,748,123,798},
-//               {128,736,152,798} };
-//    for(int i=0;i<coords1.length;i++){
-//      p = createImage(coords[i][2]-coords[i][0]+1,coords[i][3]-coords[i][1]+1,RGB);
-//      p.loadPixels();
-//      x=coords[i][0];
-//      y=coords[i][1];
-//      for(int pix=0;pix<p.pixels.length;pix++){
-//        p.pixels[pix]=sora.pixels[y*600+x];
-//        x++;
-//        if(x>coords[i][2]){
-//          x=coords[i][0];
-//          y++; 
-//        }
-//      }
-//      p.updatePixels();
-//      jump.add(p);
-//    }
   }
   
   void move(){
@@ -176,31 +100,7 @@ class Delsin {
 //    println(pos);
     x=Float.valueOf(pos.x-w/2).intValue();
     y=Float.valueOf(pos.y-h/2).intValue();
-
-//    display.loadPixels();
-//    for(int i=0;i<display.pixels.length;i++){
-//      if(display.pixels[i]==color(73,98,132))
-//        display.pixels[i]=s0000.pixels[y*width+x];
-////      println(x,y);
-//      x++;
-//      if(x>display.width+Float.valueOf(pos.x-w/2).intValue()){
-//        x=Float.valueOf(pos.x-w/2).intValue();
-//        y++;
-//      }
-//    }
-//    for(int b=0;b<display.height;b++){
-//      for(int a=0;a<display.width;a++){
-//        if(display.pixels[a+b*display.width]==color(73,98,132))
-//          display.pixels[a+b*display.width]=s0000.pixels[x+y*width];
-//        x++;
-//        if(x>display.width+Float.valueOf(pos.x-w/2).intValue()){
-//          x=Float.valueOf(pos.x-w/2).intValue();
-//          y++;
-//        }
-//      }
-//    }
-//    display.updatePixels();
-//    println(x,y);
+  
     if(up){
       int x1=jump[0];
       int y1=jump[1];
