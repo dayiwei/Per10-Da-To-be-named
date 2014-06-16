@@ -9,6 +9,7 @@ boolean left;
 boolean right;
 boolean up;
 int counter;
+ArrayList<Smoke_Shot> smokeShot;
 ArrayList<PImage> fire;
 
 ArrayList<Box> boxes;
@@ -93,12 +94,18 @@ void draw() {
   ground.display();
 
   //cursor(CROSS);
-  // When the mouse is clicked, add a new Box object
   if (mousePressed) {
-    Box p = new Box(mouseX,mouseY);
-    boxes.add(p);
+    if(mouseButton==LEFT)
+      delsin.shoot(mouseX,mouseY);
+    else if(mouseButton==RIGHT){
+      Box p = new Box(mouseX,mouseY);
+      boxes.add(p);
+    }
   }
 
+  for(Smoke_Shot bullets: smokeShot){
+    bullets.display(box2d.vectorPixelsToWorld(bullets.bd.getPosition())); 
+  }
   // Display all the boxes
   for (Box b: boxes) {
     b.display();

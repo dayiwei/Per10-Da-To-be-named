@@ -7,6 +7,7 @@ class Delsin {
   int[] jump;
   int[] standby;
   PImage sora;
+
   
   boolean isRunning;
   boolean isattcking;
@@ -60,6 +61,8 @@ class Delsin {
     jump = new int[] {128,736,152,798};
     
     standby = new int[] {47,595,82,645};
+    
+    smokeShot = new ArrayList<Smoke_Shot>();
     
 //    int x=0;
 //    int y=0;
@@ -160,9 +163,11 @@ class Delsin {
     }
   }
   
-  void shoot(){
-    Smoke_Shot bullet = new Smoke_Shot();
-    bullet.shoot();
+  void shoot(float x, float y){
+    Smoke_Shot bullet = new Smoke_Shot(bd.getPosition());
+    smokeShot.add(bullet);
+    bullet.fire(box2d.coordPixelsToWorld(new Vec2(x,y)));
+    bullet.display(new Vec2(x,y));
   }
 
   void display(){
@@ -201,7 +206,15 @@ class Delsin {
       int y1=jump[1];
       int x2=jump[2];
       int y2=jump[3];
-      image(sora,pos.x-w/2,pos.y-h/2,x2-x1+1,y2-y1+1,x1,y1,x2,y2);
+      
+      if(right){
+        pushMatrix();
+        scale(-1,1);
+        image(sora,-1*pos.x-w/2,pos.y-h/2,x2-x1+1,y2-y1+1,x1,y1,x2,y2);
+        popMatrix();
+      }
+      else
+        image(sora,pos.x-w/2,pos.y-h/2,x2-x1+1,y2-y1+1,x1,y1,x2,y2);
     }
     else if(right){
       int x1=run[counter/5][0];
